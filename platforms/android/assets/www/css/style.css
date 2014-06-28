@@ -1,0 +1,59 @@
+/* Empty. Add your own CSS if you like */
+.drag{
+    position: absolute;
+    height: 100% !important;
+    width: 10px !important;
+    color: #ffffff;
+    background-color: transparent;
+    z-index: 1000;
+}
+.pad-sm{
+    padding-top: 0px !important;
+    line-height: 90%;
+    font-size: 12px;
+}
+.mag-sm{
+    margin-top: 0px !important;
+}
+.push-up{
+    position: relative !important;
+    top : -5px !important;
+}
+
+.text-md{
+    font-size: 18px;
+}
+
+.text-just{
+    text-justify: inter-word;
+}
+
+.ng-hide-add{
+    opacity: 0;
+}
+.ng-hide-remove {
+    opacity: 1;
+}
+
+.ng-hide-remove-active, .ng-hide-add-active{
+    -webkit-transition:all linear 0.5;
+    transition:all linear 0.5s;
+}
+
+.ng-hide {
+    opacity:0;
+}
+
+.anim .ng-hide-add{
+    opacity:1;
+}
+
+.anim .ng-enter{
+    transition: ease-in 0.5s;
+    -webkit-transition: ease-in 0.5s;
+    opacity: 0;
+}
+
+.anim .ng-enter-active{
+    opacity: 1;
+}

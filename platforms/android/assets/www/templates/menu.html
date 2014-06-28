@@ -1,0 +1,84 @@
+<ion-side-menus>
+
+  <ion-pane drag-content="false" ion-side-menu-content>
+    <!--This nav bar auto updates based on the view in this content-->
+    <ion-nav-bar class="bar-dark nav-title-slide-ios7">
+        <ion-nav-buttons>
+            
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <!--This is a view placeholder-->
+    <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
+    <ion-footer-bar class="bar bar-dark bar-footer">
+        <button ng-show="currentChapter !== 1" ng-click="changeChapter('prev')" class="button button-clear button-small ion-arrow-left-a"></button>
+        <button class="button-clear button col col-center">{{currentChapter}} of {{currentBook.chapterList.length}}</button>
+        <button ng-show="currentChapter !== currentBook.chapterList.length" ng-click="changeChapter('next')" class="button button-clear button-small ion-arrow-right-a"></button>
+    </ion-footer-bar>
+  </ion-pane>
+
+  <ion-side-menu side="left" class="dark-bg dark-border">
+      <ion-header-bar class="bar bar-header bar-dark">
+          <div class="row row-stretch row-center">
+              <span class="col-60 col-center">
+                  <label class="">{{bookType.booksMap[bookType.books.indexOf(bookType.book)]}}</label>
+                  <label>&nbsp;</label>
+              </span>
+              <span class="col-40 col-center">
+                  <label for="OT">OT</label>
+                  <input id="OT" type="checkbox" value="OT" name="OT" checked="true" ng-model="otActive">
+                  <label>&nbsp;</label>
+                  <label for="NT">NT</label>
+                  <input id="NT" type="checkbox" value="NT" name="NT" checked="true" ng-model="ntActive">
+              </span>
+          </div>
+      </ion-header-bar>
+
+      <ion-content>
+          <ion-list class="list has-header ">
+              <div ng-if="otActive" class="item item-divider">Old Testament</div>
+              <ion-item ng-if="otActive" ng-click="setCurrentBook(book)" ng-repeat="book in books.OT"
+                        ng-class='{active:currentBookName === book}' class="list-item item-dark">
+                  {{book | replaceUnderscore}}
+                  <div class="row-center" ng-repeat="grp in chapterList" ng-if="currentBookName === book">
+                      <a class="button button-small button-dark"
+                         ng-click="setChapter(currentBook.chapterList.indexOf(subgrp) + 1)"
+                         ng-class='{active:(currentBook.chapterList.indexOf(subgrp) + 1) === currentChapter}'
+                         ng-repeat="subgrp in grp">
+                          {{subgrp | replacePrefix}}
+                      </a>
+                  </div>
+              </ion-item>
+              <div ng-if="ntActive" class="item item-divider">New Testament</div>
+              <ion-item ng-if="ntActive" ng-click="setCurrentBook(book)" ng-repeat="book in books.NT"
+                        ng-class='{active:currentBookName === book}' class="list-item item-dark">
+                  {{book | replaceUnderscore}}
+                  <div class="row-center" ng-repeat="grp in chapterList" ng-if="currentBookName === book">
+                      <a class="button button-small button-dark"
+                         ng-click="setChapter(currentBook.chapterList.indexOf(subgrp) + 1)"
+                         ng-class='{active:(currentBook.chapterList.indexOf(subgrp) + 1) === currentChapter}'
+                         ng-repeat="subgrp in grp">
+                          {{subgrp | replacePrefix}}
+                      </a>
+                  </div>
+              </ion-item>
+          </ion-list>
+      </ion-content>
+
+      <ion-footer-bar class="bar bar-footer bar-dark">
+          <span class="col">
+              <label class="ion-android-book" for="KJV">KJV</label>
+              <input id="KJV" type="radio" value="KJV" name="book" ng-model="bookType.book">
+          </span>
+          <span class="col">
+              <label class="ion-android-book" for="WEV">WEV</label>
+              <input id="WEV" type="radio" value="WEV" name="book" ng-model="bookType.book">
+          </span>
+          <span class="col">
+              <label class="ion-android-book" for="NHEB">NHEB</label>
+              <input id="NHEB" type="radio" value="NHEB" name="book" ng-model="bookType.book">
+          </span>
+      </ion-footer-bar>
+  </ion-side-menu>
+</ion-side-menus>
+
+<div id="drag" class="drag"></div>

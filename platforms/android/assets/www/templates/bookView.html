@@ -1,0 +1,24 @@
+<ion-view title="{{currentBook.name}} {{currentChapter}}">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-android-drawer"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-icon ion-android-search"></button>
+        <button class="button button-icon ion-bookmark"></button>
+    </ion-nav-buttons>
+    <ion-content class="has-header" has-bouncing="false">
+        <ion-list class="swipe-list anim">
+            <div  class="" ng-repeat="item in currentBook.chapters[currentChapter - 1]">
+                <div ng-click="selectItem($index)" ng-class='{active: selectedItem === $index}' class="item item-text-wrap text-md">
+                    <b>{{$index + 1}}</b> : <span class="text-just">{{item.content}}</span>
+                </div>
+                <div ng-if="selectedItem === $index" class="item item-divider row">
+                    <button class="col col-center button button-clear"></button>
+                    <button ng-click="addBookmark($index + 1)" class="col col-center button-icon button button-clear ion-android-star"></button>
+                    <button ng-click="share($index + 1)" class="col col-center button-icon button button-clear ion-android-share"></button>
+                    <button class="col col-center button button-clear"></button>
+                </div>
+            </div>
+        </ion-list>
+    </ion-content>
+</ion-view>
